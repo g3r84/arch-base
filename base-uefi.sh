@@ -6,11 +6,11 @@ sed -i '177s/.//' /etc/locale.gen
 locale-gen
 echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 echo "KEYMAP=la-latin1" >> /etc/vconsole.conf
-echo "Olympia" >> /etc/hostname
+echo "typeyourhost" >> /etc/hostname
 echo "127.0.0.1 localhost" >> /etc/hosts
 echo "::1       localhost" >> /etc/hosts
-echo "127.0.1.1 Olympia.localdomain Olympia" >> /etc/hosts
-echo root:Lijngres560# | chpasswd
+echo "127.0.1.1 typeyourhost.localdomain typeyourhost" >> /etc/hosts
+echo root:typerootpasswd | chpasswd
 
 # You can add xorg to the installation packages, I usually add it at the DE or WM install script
 # You can remove the tlp package if you are installing on a desktop or vm
@@ -25,7 +25,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 systemctl enable NetworkManager
 systemctl enable bluetooth
-# systemctl enable cups
+# systemctl enable cups # Printing package exluded, see above
 systemctl enable sshd
 systemctl enable avahi-daemon
 systemctl enable tlp # You can comment this command out if you didn't install tlp, see above
@@ -36,11 +36,11 @@ systemctl enable firewalld
 systemctl enable acpid
 systemctl enable systemd-networkd
 
-useradd -m castor
-echo castor:Lijngres560 | chpasswd
-#usermod -aG libvirt castor
+useradd -m typeyouruser
+echo typeyouruser:typeyourpsw | chpasswd
+#usermod -aG libvirt typeyouruser # You can comment this command out if you are not virtualizing this installation, as in virtualbox. vmware, etc
 
-echo "castor ALL=(ALL) ALL" >> /etc/sudoers.d/castor
+echo "typeyouruser ALL=(ALL) ALL" >> /etc/sudoers.d/typeyouruser
 
 
 printf "\e[1;32mDone! Type exit, umount -a and reboot.\e[0m"
